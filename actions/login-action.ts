@@ -1,0 +1,17 @@
+"use server"
+
+import { createClient } from "@/lib/supabase/serverClient"
+import { redirect } from "next/navigation"
+import { loginSchema } from "./schemas"
+import z from "zod"
+
+export const Login = async (userdata:z.infer<typeof loginSchema>) => {
+  // const parsedData = loginSchema.parse(userdata)
+
+  const supabase = await createClient()
+  const {data, error} = await supabase.auth.signInWithPassword(userdata)
+
+  if (error) throw error
+
+  redirect("/")
+}
