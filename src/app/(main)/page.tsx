@@ -3,6 +3,8 @@ import PostSummary from "@/components/Posts/PostSummary";
 import { getHomePosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
+// export const revalidate = 600
+
 export default async function Home() {
   const supabase = await createClient();
   const { data, error } = await getHomePosts(supabase);
@@ -10,12 +12,6 @@ export default async function Home() {
   return (
     <div className="flex flex-col items-center py-10">
       <h2 className="heading font-bold text-pacifika">Welcome to the forum</h2>
-      {data &&
-        data.map((item) => (
-          <div key={item.id}>
-            {item.title} {item.slug} {item.author.username} {item.author.id}
-          </div>
-        ))}
       <HomePosts posts={data} />
       {/* <PostSummary posts={data} /> */}
     </div>

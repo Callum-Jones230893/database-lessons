@@ -14,12 +14,150 @@ export type Database = {
   }
   public: {
     Tables: {
+      applicants: {
+        Row: {
+          created_at: string
+          deleted: boolean
+          deleted_at: string
+          experience: boolean | null
+          id: string
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          deleted?: boolean
+          deleted_at: string
+          experience?: boolean | null
+          id?: string
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          deleted?: boolean
+          deleted_at?: string
+          experience?: boolean | null
+          id?: string
+          name?: string | null
+        }
+        Relationships: []
+      }
+      brackets: {
+        Row: {
+          bracket_number: number
+          created_at: string
+          game_number: number
+          id: string
+          loser: string | null
+          player_one: string | null
+          player_two: string | null
+          time_slot: string
+          winner: string | null
+        }
+        Insert: {
+          bracket_number: number
+          created_at?: string
+          game_number: number
+          id?: string
+          loser?: string | null
+          player_one?: string | null
+          player_two?: string | null
+          time_slot?: string
+          winner?: string | null
+        }
+        Update: {
+          bracket_number?: number
+          created_at?: string
+          game_number?: number
+          id?: string
+          loser?: string | null
+          player_one?: string | null
+          player_two?: string | null
+          time_slot?: string
+          winner?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "brackets_player_one_fkey"
+            columns: ["player_one"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "brackets_player_one_fkey1"
+            columns: ["player_one"]
+            isOneToOne: false
+            referencedRelation: "applicants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "brackets_player_two_fkey"
+            columns: ["player_two"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      comments: {
+        Row: {
+          commenter: string | null
+          content: string
+          created_at: string
+          deleted: boolean
+          deleted_at: string | null
+          id: string
+          parent_id: string | null
+          post_id: string | null
+          title: string | null
+        }
+        Insert: {
+          commenter?: string | null
+          content: string
+          created_at?: string
+          deleted?: boolean
+          deleted_at?: string | null
+          id?: string
+          parent_id?: string | null
+          post_id?: string | null
+          title?: string | null
+        }
+        Update: {
+          commenter?: string | null
+          content?: string
+          created_at?: string
+          deleted?: boolean
+          deleted_at?: string | null
+          id?: string
+          parent_id?: string | null
+          post_id?: string | null
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_commenter_fkey"
+            columns: ["commenter"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "post"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       post: {
         Row: {
           author: string
           category: string | null
           content: string | null
           created_at: string
+          deleted: boolean
+          deleted_at: string | null
           id: string
           image: string | null
           slug: string
@@ -30,6 +168,8 @@ export type Database = {
           category?: string | null
           content?: string | null
           created_at?: string
+          deleted?: boolean
+          deleted_at?: string | null
           id?: string
           image?: string | null
           slug: string
@@ -40,6 +180,8 @@ export type Database = {
           category?: string | null
           content?: string | null
           created_at?: string
+          deleted?: boolean
+          deleted_at?: string | null
           id?: string
           image?: string | null
           slug?: string
@@ -50,28 +192,40 @@ export type Database = {
             foreignKeyName: "post_author_fkey"
             columns: ["author"]
             isOneToOne: false
-            referencedRelation: "user"
+            referencedRelation: "profile"
             referencedColumns: ["id"]
           },
         ]
       }
-      user: {
+      profile: {
         Row: {
           created_at: string
+          deleted: boolean
+          deleted_at: string | null
           email: string
+          experience: boolean | null
           id: string
+          role: string
           username: string
         }
         Insert: {
           created_at?: string
+          deleted?: boolean
+          deleted_at?: string | null
           email: string
+          experience?: boolean | null
           id?: string
+          role?: string
           username: string
         }
         Update: {
           created_at?: string
+          deleted?: boolean
+          deleted_at?: string | null
           email?: string
+          experience?: boolean | null
           id?: string
+          role?: string
           username?: string
         }
         Relationships: []

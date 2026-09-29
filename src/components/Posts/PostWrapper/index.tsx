@@ -3,7 +3,7 @@ import PostContent from "../PostContent"
 import PostHeader from "../PostHeader"
 
 type PostWrapperProps = {
-  posts: SinglePostType  
+  posts: SinglePostType | null
 }
 
 const PostWrapper = ({ posts }: PostWrapperProps) => {

@@ -21,7 +21,7 @@ const HomePosts = ({ posts }: HomePostProps) => {
     },
     initialData: posts,
     staleTime: 1000,
-  });
+  })
 
   return (
     <div className="w-8/10">

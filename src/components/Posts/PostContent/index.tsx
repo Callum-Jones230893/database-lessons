@@ -2,7 +2,7 @@ import { getHomePosts, getSinglePost, HomePostType, SinglePostType } from "@/lib
 import { useQuery } from "@tanstack/react-query";
 
 type PostContentProps = {
-  posts: SinglePostType
+  posts: SinglePostType | null
 }
 
 const PostContent = async ({ posts }: PostContentProps) => {  
