@@ -8,6 +8,9 @@ type PostContentProps = {
 const PostContent = async ({ posts }: PostContentProps) => {  
   return (
     <div>
+      {posts && posts.image && 
+        <img src="" alt="" />
+      }
       {/* <p>{posts.content}</p> */}
     </div>
   )
