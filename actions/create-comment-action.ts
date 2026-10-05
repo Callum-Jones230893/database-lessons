@@ -14,14 +14,14 @@ export const CreatePost = async (commentData: z.infer<typeof createCommentSchema
     throw new Error("Please login before commenting")
   }
 
-  await supabase
-  .from("comment")
-  .insert({
-    ...parsedData,
-    // add post_id (parent)
-    author: user.id,
-    deleted: false
-  })
+  // await supabase
+  // .from("comment")
+  // .insert({
+  //   ...parsedData,
+  //   // add post_id (parent)
+  //   author: user.id,
+  //   deleted: false
+  // })
 
   redirect(`/`)
 }

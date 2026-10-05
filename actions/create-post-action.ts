@@ -20,11 +20,11 @@ export const CreatePost = async (postData: z.infer<typeof createPostSchema>) => 
 
   const imgFile = postData.image?.get("image")
   
-  if(!(imgFile instanceof File) && imgFile){
-    
+  if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
+    throw Error ("Image is not a valid format, please try again.")
   }
 
-  const imgUrl = imgFile ? await uploadImage(imgFile as File) : null
+  const imgUrl = (imgFile && imgFile !== "undefined") ? await uploadImage(imgFile as File) : null
 
   await supabase
   .from("post")

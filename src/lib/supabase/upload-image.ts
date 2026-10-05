@@ -4,7 +4,7 @@ import { createClient } from "./serverClient";
 export const uploadImage = async (image: File) => {
   const supabase = await createClient()
 
-  const imageName = image.name.split(".")
+  const imageName: string[] = image.name.split(".")
   const uniqueImageName = `${imageName[0]}-${uuidv4()}-${imageName[1]}`
 
   const {data, error} = await supabase.storage.from("images").upload(uniqueImageName, image)

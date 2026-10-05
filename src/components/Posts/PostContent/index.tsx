@@ -9,7 +9,7 @@ const PostContent = async ({ posts }: PostContentProps) => {
   return (
     <div>
       {posts && posts.image && 
-        <img src="" alt="" />
+        <img src={posts.image} alt={posts.title} />
       }
       {/* <p>{posts.content}</p> */}
     </div>
