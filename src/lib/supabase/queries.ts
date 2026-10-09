@@ -1,24 +1,24 @@
-import { createClient } from "./browserClient";
-import { type QueryData } from "@supabase/supabase-js";
+import { createClient } from "./browserClient"
+import { type QueryData } from "@supabase/supabase-js"
 
-export type HomePostType = QueryData<ReturnType<typeof getHomePosts>>;
+export type LandingPostType = QueryData<ReturnType<typeof getLandingPosts>>
 
-export const getHomePosts = async (supabase: ReturnType<typeof createClient>) => {
+export const getLandingPosts = async (supabase: ReturnType<typeof createClient>) => {
   return await supabase
     .from("post")
     .select(`id, title, slug, author("id", "username")`);
 };
 
-export type SinglePostType = QueryData<ReturnType<typeof getSinglePost>>
+export type FullPostType = QueryData<ReturnType<typeof getFullPost>>
 
-export const getSinglePost = async (slug: string) => {
-  const supabase = createClient();
+export const getFullPost = async (slug: string) => {
+  const supabase = createClient()
   return await supabase
     .from("post")
-    .select(`title, id, content, image, author("id", "username")`)
+    .select(`id, title, content, image, author("id", "username")`)
     .eq(`slug`, slug)
-    .single();
-};
+    .single()
+}
 
 export type SearchPostType = QueryData<ReturnType<typeof searchPosts>>
 
@@ -28,4 +28,15 @@ export const searchPosts = async (searchTerm: string) => {
     .from("post")
     .select(`title, slug`)
     .textSearch(`title`, searchTerm)
+}
+
+export type CommentType = QueryData<ReturnType<typeof getComment>>
+
+export const getComment = async (postId: string) => {
+  const supabase = createClient()
+  return await supabase
+    .from("comments")
+    .select(`id, content, commenter("username", "id")`)
+    .eq("post_id", postId)
+    .order("created_at", {ascending: false})
 }

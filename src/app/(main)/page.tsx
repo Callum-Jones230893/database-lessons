@@ -1,13 +1,12 @@
 import HomePosts from "@/components/HomePosts";
-import PostSummary from "@/components/Posts/PostSummary";
-import { getHomePosts } from "@/lib/supabase/queries";
+import { getLandingPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 // export const revalidate = 600
 
 export default async function Home() {
   const supabase = await createClient();
-  const { data, error } = await getHomePosts(supabase);
+  const { data, error } = await getLandingPosts(supabase);
 
   return (
     <div className="flex flex-col items-center py-10">

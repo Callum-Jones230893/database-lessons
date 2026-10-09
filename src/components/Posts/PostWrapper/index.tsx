@@ -1,9 +1,9 @@
-import { SinglePostType } from "@/lib/supabase/queries"
+import { FullPostType } from "@/lib/supabase/queries"
 import PostContent from "../PostContent"
 import PostHeader from "../PostHeader"
 
 type PostWrapperProps = {
-  posts: SinglePostType | null
+  posts: FullPostType | null
 }
 
 const PostWrapper = ({ posts }: PostWrapperProps) => {

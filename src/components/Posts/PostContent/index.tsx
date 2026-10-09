@@ -1,15 +1,15 @@
-import { getHomePosts, getSinglePost, HomePostType, SinglePostType } from "@/lib/supabase/queries"
+import { FullPostType } from "@/lib/supabase/queries"
 import { useQuery } from "@tanstack/react-query";
 
 type PostContentProps = {
-  posts: SinglePostType | null
+  posts: FullPostType | null
 }
 
 const PostContent = async ({ posts }: PostContentProps) => {  
   return (
     <div>
       {posts && posts.image && 
-        <img src={posts.image} alt={posts.title} />
+        <img height={200} width={200} src={posts.image} alt={posts.title} />
       }
       {/* <p>{posts.content}</p> */}
     </div>

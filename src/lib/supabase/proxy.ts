@@ -39,8 +39,8 @@ export async function UpdateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const protectedRoutes: RegExp[] = [
-    /^\/createPost\$/,
-    /^\/[^\/]+\/editPost\$/
+    /^\/create\$/,
+    /^\/[^\/]+\/edit\$/
   ]
 
   if (!user && protectedRoutes.some((route) => route.test(request.nextUrl.pathname))) {

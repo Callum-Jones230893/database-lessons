@@ -1,12 +1,12 @@
 "use client";
 
-import { getHomePosts, HomePostType } from "@/lib/supabase/queries";
+import { getLandingPosts, LandingPostType } from "@/lib/supabase/queries";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 
 type HomePostProps = {
-  posts: HomePostType | null
+  posts: LandingPostType | null
 };
 
 const HomePosts = ({ posts }: HomePostProps) => {
@@ -14,7 +14,7 @@ const HomePosts = ({ posts }: HomePostProps) => {
   const { data } = useQuery({
     queryKey: ["home-posts"],
     queryFn: async () => {
-      const { data, error } = await getHomePosts(supabase);
+      const { data, error } = await getLandingPosts(supabase);
       if (error) throw new Error();
 
       return data;

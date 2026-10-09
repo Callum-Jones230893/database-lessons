@@ -1,8 +1,8 @@
-import { SinglePostType } from "@/lib/supabase/queries"
+import { FullPostType } from "@/lib/supabase/queries"
 
 
 type PostHeaderProps = {
-  posts: SinglePostType | null
+  posts: FullPostType | null
 }
 
 const PostHeader = ({ posts }: PostHeaderProps) => {
@@ -10,7 +10,7 @@ const PostHeader = ({ posts }: PostHeaderProps) => {
     <>
       {posts &&
         <div>
-          <h2>{posts.title}</h2>
+          <h2 className="text-2xl">{posts.title}</h2>
           <p>{posts.author.username}</p>
         </div>
       }
